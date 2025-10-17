@@ -46,53 +46,10 @@ Trigger systems at the LHC must decide, **in real time**, which events to keep a
 
 These numbers reflect a realistic, leak-safe estimate of how the model generalizes.
 
-## How to run (Kaggle-friendly)
 
-1. Create a new Kaggle Notebook and **Add Data** → attach your HDF5 dataset (folder with `train.h5`, `test.h5` if available).
-2. Upload the notebook `top_quark_tabular_streaming_v6_1_leaksafe.ipynb` from this repo.
-3. Run top-to-bottom. It will:
-
-   * Discover files automatically under `/kaggle/input/`
-   * Print the HDF5 structure
-   * Train in streaming mode
-   * Save `outputs/submission.csv` with probabilities for test (if `test.h5` is present)
-
-> If auto label detection misses your columns, set:
-
-```python
-LABEL_COLS = ["ttv", "is_signal_new"]  # or your exact column names
-ONE_HOT = True
-```
-
-## Repo structure (suggested)
-
-```
-/notebooks
-  └── top_quark_tabular_streaming_v6_1_leaksafe.ipynb  # main, leak-safe training
-/outputs
-  └── submission.csv   # written by the notebook (ignored by git)
-README.md
-```
-
-## Notes & gotchas
-
-* Perfect validation is suspicious—**make sure** your validation rows are excluded from training (this notebook does it for you).
-* If you hit memory limits: lower `CHUNK_SIZE` and `BATCH_SIZE`.
-* For trigger-like deployments, you can later compress the MLP or distill to a smaller network.
-
-## Roadmap
-
-* Add k-fold streaming CV (leak-safe).
-* Try gradient-boosted trees (LightGBM/XGBoost) as strong tabular baselines.
-* Feature importance (permutation/SHAP) to understand the physics drivers.
-* Optional image path: convert constituents to **jet images** and compare a small CNN/ResNet.
 
 ## Acknowledgments
 
 * Dataset authors and the HEP community for pushing open benchmarks in jet tagging.
 * Kaggle for making large-scale experiments easy to reproduce.
 
----
-
-**Short project blurb (for your profile):**
-“Built a memory-safe, streaming PyTorch pipeline over 1.21M HDF5 rows to tag top-quark jets, delivering **0.9997 AUC** and **0.845 F1** on a leak-safe holdout; designed for practical trigger/storage gains at the LHC.”
