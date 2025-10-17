@@ -3,7 +3,7 @@
 
 Modern colliders like the LHC produce a firehose of particle “jets.” Most are mundane; a few come from interesting decays (like top quarks) that can hint at new physics. This project builds a **memory-safe, streaming PyTorch pipeline** that learns to tell those apart directly from large **HDF5 (pandas table) data** without loading everything into RAM.
 
-## Why this matters (real world)
+## Why this matters in the real world
 
 Trigger systems at the LHC must decide, **in real time**, which events to keep and which to discard. Better jet tagging means:
 
@@ -24,8 +24,6 @@ Trigger systems at the LHC must decide, **in real time**, which events to keep a
 * Source: top-quark jet tagging dataset (HDF5, pandas table with 804 numeric features + 2 label columns).
 * Scale: **~1.211M rows** in `train.h5`.
 * Files expected: `train.h5`, `test.h5` (optional), stored as `/table/table`.
-
-> Tip: Use **Kaggle** to attach the dataset—no need to download 10+ GB locally.
 
 ## Method (short version)
 
